@@ -1,16 +1,15 @@
 var http = require("http"); //solicita el modulo http a node
 var url = require("url"); //solicita el modulo url que permite parsear la ruta
 
-function iniciar(route) {
+function iniciar(route, handle) {
   function onRequest(request, response){
 
     var pathname = url.parse(request.url).pathname; //parseo la ruta
     console.log("Peticion para " + pathname + " recibida.");
 
-    route(pathname);
-
     response.writeHead(200, {"Content-Type": "text/html"});
-    response.write("Hola Mundo");
+    var content = route(handle, pathname);
+    response.write(content);
     response.end();
     //console.log(request.headers);
   }
