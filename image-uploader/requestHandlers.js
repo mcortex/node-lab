@@ -1,10 +1,12 @@
 /*
 Permite ligar al requestHandler con el router
 */
+var querystring = require("querystring");
 
-function iniciar(response) {
+function iniciar(response, postData) {
   console.log("Manipulador de peticion 'iniciar' has sido llamado.");
 
+// NOTA: La logica de la vista no esta separada del controlador:
   var body = '<html>'+
     '<head>'+
     '<meta http-equiv="Content Type" content="text/html" charset="UTF-8"/>'+
@@ -22,10 +24,10 @@ function iniciar(response) {
   response.end();
 }
 
-function subir() {
+function subir(response, postData) {
   console.log("Manipulador de peticion 'subir' has sido llamado.");
   response.writeHead(200, {"Content-Type": "text/html"});
-  response.write("Hola Subir");
+  response.write("Se recibio " + querystring.parse(postData)["text"]);
   response.end();
 }
 

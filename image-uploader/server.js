@@ -5,10 +5,19 @@ function startServer(route, handle) {
   function onRequest(request, response){
 
     var pathname = url.parse(request.url).pathname; //parseo la ruta
+    var dataPosteada = "";
     console.log("Peticion para " + pathname + " recibida.");
 
-
-    route(handle, pathname, response);
+    request.setEncoding("utf8");
+    // Agrego un listener que postee de a pedazos para que no sea bloqueante
+    request.addListener("data", function(chunk) {
+          dataPosteada += chunk;
+          console.log("Recibido trozo POST '" + chunk + "'."); // smell
+    });
+    // Este listener envia toda la data posteada al router
+    request.addListener("end", function() {
+      route(handle, pathname, response, dataPosteada);
+    });
 
     //console.log(request.headers);
   }
