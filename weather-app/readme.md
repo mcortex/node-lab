@@ -8,9 +8,13 @@ Fuente: https://codeburst.io/build-a-weather-website-in-30-minutes-with-node-js-
 Modulos instalados:
 
 `npm install --save express`
+
 `npm install ejs --save`
+
 `npm install body-parser --save`
+
 `npm install request --save`
 ---
 Ejecutar la app con:
+
 `node server.js`
