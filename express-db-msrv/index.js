@@ -1,13 +1,11 @@
 const express = require("express")
 var mysql = require("mysql")
 
-
-
 const app = express()
 
-
-
-
+app.get("/", function(req,res) {
+  res.send('Invoice Management Console')
+})
 
 app.get("/api/invoices/:id", (req, res) => {
   const id = parseInt(req.params.id)
